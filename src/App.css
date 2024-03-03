@@ -41,15 +41,17 @@ h1 {
 	font-size: 2em;
 	margin: 0.67em 0;
 }
-
-video {
-	position: fixed;
-	right: 0;
-	bottom: 0;
-	min-width: 100%;
-	min-height: 100%;
-	object-fit: cover;
+@media only screen and (min-device-width: 375px) and (max-device-width: 812px) {
+	.videos {
+		position: fixed;
+		right: 0;
+		bottom: 0;
+		min-width: 100%;
+		min-height: 100%;
+		object-fit: cover;
+	}
 }
+
 .congrats {
 	font-size: 10vw;
 	/* make our h1 tag larger */

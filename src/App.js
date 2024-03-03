@@ -100,14 +100,16 @@ function App() {
 				</div>
 			)}
 			{second && (
-				<div className={`h-screen `}>
+				<div
+					className={`h-screen  lg:flex lg:justify-center lg:items-center lg:flex-col`}
+				>
 					<video
+						className='videos'
 						src={videos}
 						autoPlay
-						controls={true}
 						loop
 						playsInline
-						height={"100%"}
+						controls={false}
 					></video>
 				</div>
 			)}
