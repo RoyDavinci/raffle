@@ -70,9 +70,9 @@ function App() {
 	return (
 		<>
 			{first && (
-				<div className='flex flex-col justify-center items-center h-screen'>
+				<div className='flex flex-col justify-center items-center h-screen px-8'>
 					<div>
-						<img src={logo} alt='' className='w-[40rem] h-[30rem]' />
+						<img src={logo} alt='' className='lg:w-[40rem] lg:h-[30rem]' />
 						<form action=''>
 							<input
 								type='text'
