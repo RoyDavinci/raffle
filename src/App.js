@@ -100,10 +100,15 @@ function App() {
 				</div>
 			)}
 			{second && (
-				<div
-					className={`h-screen  transition-all duration-500 flex justify-center items-center flex-col`}
-				>
-					<video src={videos} autoPlay controls={true} loop playsInline></video>
+				<div className={`h-screen `}>
+					<video
+						src={videos}
+						autoPlay
+						controls={true}
+						loop
+						playsInline
+						height={"100%"}
+					></video>
 				</div>
 			)}
 			{third && (
