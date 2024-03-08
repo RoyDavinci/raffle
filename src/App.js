@@ -153,7 +153,7 @@ function App() {
 						)}
 						<h1 className='font-extrabold text-2xl '>
 							{" "}
-							You Have Won A Free Ticket
+							You Have Won A Free Gift Courtesy of Linda Obieze
 						</h1>
 						<button
 							onClick={handleChange}
