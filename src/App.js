@@ -47,12 +47,6 @@ function App() {
 			setSecond(false);
 			setThird(true);
 		}, 10000);
-		setTimeout(() => {
-			setFirst(true);
-			setThird(false);
-			setWinners([]);
-			SetWinner("");
-		}, 60000);
 	};
 
 	const handleChange = (e) => {
