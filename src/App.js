@@ -11,6 +11,8 @@ function App() {
 	const [second, setSecond] = useState(false);
 	const [third, setThird] = useState(false);
 	const [winner, SetWinner] = useState("");
+	const [winners, setWinners] = useState([]);
+	const [numberOFWinners, setNumberOfWinners] = useState("");
 	const { width, height } = useWindowSize();
 
 	const handleDone = (e) => {
@@ -20,14 +22,27 @@ function App() {
 			alert("please add a number");
 			return;
 		}
+		const item = JSON.parse(data);
+		if (item.length < Number(numberOFWinners)) {
+			alert("number of winners cannot be greater than numbers added");
+			return;
+		}
 		setFirst(false);
 		setSecond(true);
+		// console.log(item, data);
 		setTimeout(() => {
-			const data = localStorage.getItem("data");
-			const item = JSON.parse(data);
-			const randomElement = item[Math.floor(Math.random() * item.length)];
-			console.log(randomElement);
-			SetWinner(randomElement);
+			if (numberOFWinners) {
+				console.log("first");
+				for (let i = 0; i < Number(numberOFWinners); i++) {
+					const randomElement = item[Math.floor(Math.random() * item.length)];
+
+					setWinners((prev) => [...prev, randomElement]);
+				}
+			} else {
+				const randomElement = item[Math.floor(Math.random() * item.length)];
+				SetWinner(randomElement);
+			}
+
 			localStorage.clear();
 			setSecond(false);
 			setThird(true);
@@ -35,6 +50,8 @@ function App() {
 		setTimeout(() => {
 			setFirst(true);
 			setThird(false);
+			setWinners([]);
+			SetWinner("");
 		}, 60000);
 	};
 
@@ -63,8 +80,6 @@ function App() {
 			localStorage.setItem("data", JSON.stringify(item));
 			setNumber("");
 		}
-		console.log(data);
-		console.log(number);
 	};
 
 	return (
@@ -74,13 +89,22 @@ function App() {
 					<div>
 						<img src={logo} alt='' className='lg:w-[40rem] lg:h-[30rem]' />
 						<form action=''>
-							<input
-								type='text'
-								placeholder='Input Numbers for a Draw'
-								className=' px-6 py-2 w-full text-lg border-2 border-black rounded-md'
-								value={number}
-								onChange={(e) => setNumber(e.target.value)}
-							/>
+							<div className='flex justify-between items-center my-4'>
+								<input
+									type='text'
+									placeholder='Input Numbers for a Draw'
+									className=' px-6 py-2 w-full text-lg border-2 border-black rounded-md mx-2'
+									value={number}
+									onChange={(e) => setNumber(e.target.value)}
+								/>
+								<input
+									type='text'
+									placeholder='Number of winners'
+									className=' px-6 py-2 w-full text-lg border-2 border-black rounded-md mx-2'
+									value={numberOFWinners}
+									onChange={(e) => setNumberOfWinners(e.target.value)}
+								/>
+							</div>
 							<div className='flex justify-between items-center my-4'>
 								<button
 									onClick={handleAdd}
@@ -118,7 +142,15 @@ function App() {
 					<Confetti width={width} height={height} />
 					<div className='flex justify-center items-center flex-col h-screen'>
 						<h1 className='congrats'>CONGRATULATIONS</h1>
-						<h1 className='font-extrabold text-5xl underline'>{winner}</h1>
+						{winners.length > 0 ? (
+							winners.map((item) => {
+								return (
+									<h1 className='font-extrabold text-2xl underline'>{item}</h1>
+								);
+							})
+						) : (
+							<h1 className='font-extrabold text-5xl underline'>{winner}</h1>
+						)}
 						<h1 className='font-extrabold text-2xl '>
 							{" "}
 							You Have Won A Free Ticket
